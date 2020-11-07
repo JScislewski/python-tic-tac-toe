@@ -20,7 +20,7 @@ def player_input():
     OUTPUT = (Player 1 marker, Player 2 marker)
     """
     marker = ""
-    while marker != "X" and marker != "O":
+    while not (marker == "X" or marker == "O"):
         marker = input("Player1: Choose X or O: ").upper()
     if marker == "X":
         return ("X", "O")
