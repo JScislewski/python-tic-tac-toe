@@ -28,9 +28,13 @@ def player_input():
         return ("O", "X")
 
 
-test_board = ["#", "X", "O", "X", "O", "X", "O", "X", "O", "X"]
+def place_marker(board, marker, position):
+    board[position] = marker
 
+
+clear_screen()
+test_board = ["#", "X", "O", "X", "O", "X", "O", "X", "O", "X"]
 player1_marker, player2_marker = player_input()
 display_board(test_board)
-
-print(player1_marker, player2_marker)
+place_marker(test_board, "@", 3)
+display_board(test_board)
