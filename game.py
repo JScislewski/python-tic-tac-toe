@@ -1,4 +1,5 @@
 from os import system, name
+import random
 
 
 def clear_screen():
@@ -43,6 +44,14 @@ def win_check(board, marker):
         or (board[8] == marker and board[5] == marker and board[2] == marker)
         or (board[9] == marker and board[6] == marker and board[3] == marker)
     )
+
+
+def choose_first():
+    flip = random.randint(0, 1)
+    if flip == 0:
+        return "Player 1"
+    else:
+        return "Player 2"
 
 
 clear_screen()
