@@ -53,6 +53,9 @@ def choose_first():
     else:
         return "Player 2"
 
+def space_check(board, position):
+    return board[position] == " "
+
 
 clear_screen()
 test_board = ["#", "X", "O", "X", "O", "X", "O", "X", "O", "X"]
