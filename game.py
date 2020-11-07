@@ -16,7 +16,7 @@ def display_board(board):
     print("| " + board[1] + " | " + board[2] + " | " + board[3] + " |")
 
 
-def player_input():
+def choose_markers():
     """
     OUTPUT = (Player 1 marker, Player 2 marker)
     """
@@ -33,7 +33,7 @@ def place_marker(board, marker, position):
     board[position] = marker
 
 
-def win_check(board, marker):
+def has_player_won(board, marker):
     return (
         (board[1] == marker and board[2] == marker and board[3] == marker)
         or (board[4] == marker and board[5] == marker and board[6] == marker)
@@ -46,7 +46,7 @@ def win_check(board, marker):
     )
 
 
-def choose_first():
+def choose_starting_player():
     flip = random.randint(0, 1)
     if flip == 0:
         return "Player 1"
@@ -54,20 +54,30 @@ def choose_first():
         return "Player 2"
 
 
-def space_check(board, position):
+def is_field_free(board, position):
     return board[position] == " "
 
 
-def full_board_check(board):
+def is_board_full(board):
     for i in range(1, 10):
-        if space_check(board, i):
+        if is_field_free(board, i):
             return False
     return True
 
 
+def make_move(board):
+    position = 0
+
+    while position not in [1, 2, 3, 4, 5, 6, 7, 8, 9] or not is_field_free(
+        board, position
+    ):
+        position = int(input("Choose position: (1-9)"))
+    return position
+
+
 clear_screen()
 test_board = ["#", "X", "O", "X", "O", "X", "O", "X", "O", "X"]
-player1_marker, player2_marker = player_input()
+player1_marker, player2_marker = choose_markers()
 display_board(test_board)
 place_marker(test_board, "@", 3)
 display_board(test_board)
