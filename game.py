@@ -32,6 +32,19 @@ def place_marker(board, marker, position):
     board[position] = marker
 
 
+def win_check(board, marker):
+    return (
+        (board[1] == marker and board[2] == marker and board[3] == marker)
+        or (board[4] == marker and board[5] == marker and board[6] == marker)
+        or (board[7] == marker and board[8] == marker and board[9] == marker)
+        or (board[1] == marker and board[5] == marker and board[9] == marker)
+        or (board[7] == marker and board[5] == marker and board[3] == marker)
+        or (board[7] == marker and board[4] == marker and board[1] == marker)
+        or (board[8] == marker and board[5] == marker and board[2] == marker)
+        or (board[9] == marker and board[6] == marker and board[3] == marker)
+    )
+
+
 clear_screen()
 test_board = ["#", "X", "O", "X", "O", "X", "O", "X", "O", "X"]
 player1_marker, player2_marker = player_input()
