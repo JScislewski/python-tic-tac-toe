@@ -75,6 +75,11 @@ def make_move(board):
     return position
 
 
+def check_replay():
+    choice = input("Play again? Enter 'yes' or 'no'")
+    return choice == "yes"
+
+
 clear_screen()
 test_board = ["#", "X", "O", "X", "O", "X", "O", "X", "O", "X"]
 player1_marker, player2_marker = choose_markers()
