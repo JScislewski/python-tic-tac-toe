@@ -75,10 +75,15 @@ def make_move(board):
     return position
 
 
-def check_replay():
+def replay():
     choice = input("Play again? Enter 'yes' or 'no'")
     return choice == "yes"
 
+
+while True:
+
+    if not replay():
+        break
 
 clear_screen()
 test_board = ["#", "X", "O", "X", "O", "X", "O", "X", "O", "X"]
