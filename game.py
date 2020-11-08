@@ -81,6 +81,18 @@ def replay():
 
 
 while True:
+    game_board = [" "] * 10
+    player1_marker, player2_marker = choose_markers()
+
+    turn = choose_starting_player()
+    print(turn + "will start")
+
+    play_game = input("Are You ready to start the game? 'y' or 'n'?")
+
+    if play_game == "y":
+        game_on = True
+    else:
+        game_on = False
 
     if not replay():
         break
