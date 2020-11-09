@@ -116,9 +116,9 @@ while True:
             display_board(game_board)
 
             position = select_position(game_board)
-            place_marker(game_board, player1_marker, position)
+            place_marker(game_board, player2_marker, position)
 
-            if has_player_won(game_board, player1_marker):
+            if has_player_won(game_board, player2_marker):
                 display_board(game_board)
                 print("Player 2 has won!")
                 game_on = False
