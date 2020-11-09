@@ -65,7 +65,7 @@ def is_board_full(board):
     return True
 
 
-def make_move(board):
+def select_position(board):
     position = 0
 
     while position not in [1, 2, 3, 4, 5, 6, 7, 8, 9] or not is_field_free(
@@ -93,6 +93,18 @@ while True:
         game_on = True
     else:
         game_on = False
+
+    while game_on:
+        if turn == "Player 1":
+            display_board(game_board)
+
+            position = select_position(game_board)
+            place_marker(game_board, player1_marker, position)
+
+            if has_player_won(game_board, player1_marker):
+                display_board(game_board)
+                print("Player 1 has won!")
+                game_on = False
 
     if not replay():
         break
