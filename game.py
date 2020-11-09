@@ -22,7 +22,7 @@ def choose_markers():
     """
     marker = ""
     while not (marker == "X" or marker == "O"):
-        marker = input("Player1: Choose X or O: ").upper()
+        marker = input("Player1\nChoose X or O: ").upper()
     if marker == "X":
         return ("X", "O")
     else:
@@ -71,23 +71,24 @@ def select_position(board):
     while position not in [1, 2, 3, 4, 5, 6, 7, 8, 9] or not is_field_free(
         board, position
     ):
-        position = int(input("Choose position: (1-9)"))
+        position = int(input("Choose position (1-9): "))
     return position
 
 
 def replay():
-    choice = input("Play again? Enter 'yes' or 'no'")
+    choice = input("Play again? Enter 'yes' or 'no': ")
     return choice == "yes"
 
 
 while True:
+    clear_screen()
     game_board = [" "] * 10
     player1_marker, player2_marker = choose_markers()
 
     turn = choose_starting_player()
-    print(turn + "will start")
+    print(turn + " will start")
 
-    play_game = input("Are You ready to start the game? 'y' or 'n'?")
+    play_game = input("Are You ready to start the game? 'y' or 'n': ")
 
     if play_game == "y":
         game_on = True
@@ -108,7 +109,7 @@ while True:
             else:
                 if is_board_full(game_board):
                     display_board(game_board)
-                    print("It's a tie")
+                    print("It's a tie!")
                     game_on = False
                 else:
                     turn = "Player 2"
