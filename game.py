@@ -105,6 +105,30 @@ while True:
                 display_board(game_board)
                 print("Player 1 has won!")
                 game_on = False
+            else:
+                if is_board_full(game_board):
+                    display_board(game_board)
+                    print("It's a tie")
+                    game_on = False
+                else:
+                    turn = "Player 2"
+        else:
+            display_board(game_board)
+
+            position = select_position(game_board)
+            place_marker(game_board, player1_marker, position)
+
+            if has_player_won(game_board, player1_marker):
+                display_board(game_board)
+                print("Player 2 has won!")
+                game_on = False
+            else:
+                if is_board_full(game_board):
+                    display_board(game_board)
+                    print("It's a tie")
+                    game_on = False
+                else:
+                    turn = "Player 1"
 
     if not replay():
         break
