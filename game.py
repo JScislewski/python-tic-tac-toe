@@ -132,10 +132,3 @@ while True:
 
     if not replay():
         break
-
-clear_screen()
-test_board = ["#", "X", "O", "X", "O", "X", "O", "X", "O", "X"]
-player1_marker, player2_marker = choose_markers()
-display_board(test_board)
-place_marker(test_board, "@", 3)
-display_board(test_board)
