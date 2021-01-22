@@ -1,4 +1,5 @@
 from os import system, name
+import time
 import random
 
 
@@ -16,17 +17,16 @@ def display_board(board):
     print("| " + board[1] + " | " + board[2] + " | " + board[3] + " |")
 
 
-def choose_markers():
-    """
-    OUTPUT = (Player 1 marker, Player 2 marker)
-    """
-    marker = ""
-    while not (marker == "X" or marker == "O"):
-        marker = input("Player1\nChoose X or O: ").upper()
-    if marker == "X":
+def random_markers():
+    flip = random.randint(0, 1)
+    if flip == 0:
         return ("X", "O")
     else:
         return ("O", "X")
+
+
+def display_whos_turn(player, marker):
+    print(player + "(" + marker + ")" + " turn")
 
 
 def place_marker(board, marker, position):
@@ -46,12 +46,13 @@ def has_player_won(board, marker):
     )
 
 
-def choose_starting_player():
-    flip = random.randint(0, 1)
-    if flip == 0:
-        return "Player 1"
+def choose_starting_player(player_marker, ai_marker):
+    print("Randomly choosing starting player...")
+    time.sleep(1)
+    if player_marker == "X":
+        return "Player"
     else:
-        return "Player 2"
+        return "AI"
 
 
 def is_field_free(board, position):
@@ -75,6 +76,14 @@ def select_position(board):
     return position
 
 
+def ai_move(board, ai_marker):
+    position = ""
+    for i in range(1, 10):
+        if position == "" and is_field_free(board, i):
+            position = i
+    place_marker(board, ai_marker, position)
+
+
 def replay():
     choice = input("Play again? Enter 'yes' or 'no': ")
     return choice == "yes"
@@ -83,10 +92,9 @@ def replay():
 while True:
     clear_screen()
     game_board = [" "] * 10
-    player1_marker, player2_marker = choose_markers()
-
-    turn = choose_starting_player()
-    print(turn + " will start")
+    player_marker, ai_marker = random_markers()
+    turn = choose_starting_player(player_marker, ai_marker)
+    print("\n" + turn + " will start")
 
     play_game = input("Are You ready to start the game? 'y' or 'n': ")
 
@@ -96,15 +104,14 @@ while True:
         game_on = False
 
     while game_on:
-        if turn == "Player 1":
+        if turn == "Player":
             display_board(game_board)
+            selected_position = select_position(game_board)
+            place_marker(game_board, player_marker, selected_position)
 
-            position = select_position(game_board)
-            place_marker(game_board, player1_marker, position)
-
-            if has_player_won(game_board, player1_marker):
+            if has_player_won(game_board, player_marker):
                 display_board(game_board)
-                print("Player 1 has won!")
+                print("Player has won!")
                 game_on = False
             else:
                 if is_board_full(game_board):
@@ -112,16 +119,13 @@ while True:
                     print("It's a tie!")
                     game_on = False
                 else:
-                    turn = "Player 2"
+                    turn = "AI"
         else:
+            ai_move(game_board, ai_marker)
             display_board(game_board)
-
-            position = select_position(game_board)
-            place_marker(game_board, player2_marker, position)
-
-            if has_player_won(game_board, player2_marker):
+            if has_player_won(game_board, ai_marker):
                 display_board(game_board)
-                print("Player 2 has won!")
+                print("AI has won!")
                 game_on = False
             else:
                 if is_board_full(game_board):
@@ -129,7 +133,7 @@ while True:
                     print("It's a tie")
                     game_on = False
                 else:
-                    turn = "Player 1"
+                    turn = "Player"
 
     if not replay():
         break
